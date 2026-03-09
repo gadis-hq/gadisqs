@@ -1,0 +1,13 @@
+body{font-family:sans-serif;text-align:center;margin:0;padding:0;background:#fff0f5;color:#333}
+header{font-size:1.5em;margin:10px}
+.counter div{font-size:1.2em;margin:5px}
+#map{height:400px;margin:20px auto;width:95%}
+.ticker{font-size:1.2em;color:#ff4da6;margin:15px 0}
+.kodSiri input{padding:10px;width:60%;margin:5px}
+.kodSiri button{padding:10px 20px;background:linear-gradient(45deg,#ff0080,#ff4da6);color:white;border:none;border-radius:5px;font-weight:bold}
+.scanLine{height:2px;background:red;width:0%;margin:5px auto;transition:width 2s}
+.scanLine.active{width:80%}
+.result{margin:10px auto;font-size:1em}
+.stamp{width:100px;position:relative;display:none}
+.stamp.fall{display:block;animation:fall 1s forwards}
+@keyframes fall{0%{top:-50px;opacity:0}50%{top:50px;opacity:1}100%{top:0px;opacity:1}}
