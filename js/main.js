@@ -158,7 +158,13 @@ document.getElementById('installBtn').addEventListener('click', ()=>{
 });
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/gadisqs/service-worker.js')
+  navigator.serviceWorker.register('/service-worker.js')
   .then(() => console.log("Service Worker Registered"))
   .catch(err => console.log("SW Failed:", err));
 }
+
+// Semua assets path ikut root
+const STAMP_SAH = "/assets/stamp-success.png";
+const STAMP_AKTIF = "/assets/stamp-ding.png";
+const AUDIO_SAH = "/assets/applause.mp3";
+const AUDIO_AKTIF = "/assets/beep.wav";
