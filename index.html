@@ -28,6 +28,8 @@
 
 <div class="scanLine" id="scanLine"></div>
 <div class="result" id="result"></div>
+<button id="installBtn" style="display:none">Install App</button>
+  
 <img src="assets/stamp-sah.png" class="stamp" id="stampSah"/>
 <img src="assets/stamp-aktif.png" class="stamp" id="stampAktif"/>
 
@@ -37,5 +39,18 @@
 <canvas id="chartStats" width="600" height="200"></canvas>
 
 <script type="module" src="js/main.js"></script>
+
+<script>
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('installBtn').style.display='block';
+});
+document.getElementById('installBtn').addEventListener('click', ()=>{
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(()=>{ deferredPrompt=null; });
+});
+</script>  
 </body>
 </html>
