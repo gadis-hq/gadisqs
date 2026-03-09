@@ -3,42 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GADIS QS HQ Dashboard</title>
+<title>GADIS QS HQ – QAN Solution (M) BHD</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#d4af37">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode"></script>
+<script type="module" src="js/main.js"></script>
 </head>
 <body>
 
-<header>GADIS QS HQ - Dashboard Interaktif</header>
+<header>
+  <h1>GADIS QS HQ</h1>
+  <h3>QAN Solution (M) BHD</h3>
+  <p>Dashboard Sistem Pengesahan Gadis QS</p>
+</header>
 
-<div class="counter">
-  <div>Total Kod: <span id="totalKod">0</span></div>
-  <div>Ditebus: <span id="totalDitebus">0</span></div>
-  <div>Belum Ditebus: <span id="totalBelum">0</span></div>
-</div>
+<section class="ringkasan">
+  <h2>📊 Ringkasan Sistem</h2>
+  <div class="cards">
+    <div class="card hijau">SAH / TELAH DITEBUS<br><span id="countSah">0</span></div>
+    <div class="card kuning">AKTIF / BELUM DITEBUS<br><span id="countAktif">0</span></div>
+    <div class="card merah">TIDAK SAH<br><span id="countInvalid">0</span></div>
+  </div>
+</section>
 
-<div id="map"></div>
-<div class="ticker" id="ticker"></div>
+<section class="statistik">
+  <h2>📈 Statistik Harian</h2>
+  <canvas id="chartStats"></canvas>
+</section>
 
-<div style="text-align:center; margin:20px;">
-  <input type="text" id="kodInput" placeholder="Masukkan Kod Siri"/>
-  <button id="checkBtn">Semak Kod</button>
-</div>
+<section class="map">
+  <h2>🇲🇾 Map Pemenang</h2>
+  <div id="map" style="height:400px;"></div>
+</section>
 
-<div class="scanLine" id="scanLine"></div>
-<div class="result" id="result"></div>
-<button id="installBtn" style="display:none">Install App</button>
-  
-<img src="assets/stamp-sah.png" class="stamp" id="stampSah"/>
-<img src="assets/stamp-aktif.png" class="stamp" id="stampAktif"/>
+<section class="semak">
+  <h2>Semakan Kod Siri 🔍</h2>
+  <input type="text" id="kodInput" placeholder="Masukkan Kod Siri">
+  <button onclick="semakKod()">Semak</button>
+  <canvas id="qrCanvas"></canvas>
+  <div id="result"></div>
+  <video id="preview" autoplay playsinline style="display:none; width:100%; border-radius:10px;"></video>
+</section>
 
+<img src="assets/stamp-sah.png" id="stampSah" class="stamp"/>
+<img src="assets/stamp-aktif.png" id="stampAktif" class="stamp"/>
 <audio id="audioSah" src="assets/audio-sah.mp3"></audio>
 <audio id="audioAktif" src="assets/audio-aktif.wav"></audio>
 
-<canvas id="chartStats" width="600" height="200"></canvas>
-
-<script type="module" src="js/main.js"></script>
+<button id="installBtn" style="display:none">Install App</button>
 
 <script>
 let deferredPrompt;
@@ -51,6 +67,7 @@ document.getElementById('installBtn').addEventListener('click', ()=>{
   deferredPrompt.prompt();
   deferredPrompt.userChoice.then(()=>{ deferredPrompt=null; });
 });
-</script>  
+</script>
+
 </body>
 </html>
