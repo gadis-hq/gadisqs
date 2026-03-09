@@ -156,3 +156,9 @@ document.getElementById('installBtn').addEventListener('click', ()=>{
   deferredPrompt.prompt();
   deferredPrompt.userChoice.then(()=>{deferredPrompt=null;});
 });
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/gadisqs/service-worker.js')
+  .then(() => console.log("Service Worker Registered"))
+  .catch(err => console.log("SW Failed:", err));
+}
